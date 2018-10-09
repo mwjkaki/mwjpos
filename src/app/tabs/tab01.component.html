@@ -1,0 +1,23 @@
+<ons-toolbar>
+  <div class="center">商品・在庫データ選択</div>
+</ons-toolbar>
+<div class="background"></div>
+<div class="content" id="initial-page">
+<mat-card>
+  <mat-card-title>商品データ</mat-card-title>
+<mat-card>
+  <mat-card-title>端末にあるファイルを読込む</mat-card-title>
+    <mat-card-content>
+      <!-- テキストファイルを選択するinput -->
+    <input type="file" (change)="onChangeInput($event)">
+　　</mat-card-content>
+  <mat-card-actions>
+　  <button mat-flat-button (click)="readText()" color="accent" >読込</button>
+　</mat-card-actions>
+</mat-card>
+<mat-card>
+  <mat-card-title>GoogleDriveからデータを取得する</mat-card-title>
+    <button mat-flat-button (click)="readGdrive()" color="accent" >読込</button>
+</mat-card>
+</mat-card>
+</div>

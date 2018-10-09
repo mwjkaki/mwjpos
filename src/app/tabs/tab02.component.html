@@ -1,0 +1,24 @@
+<ons-toolbar>
+<div class="center">レジ</div>
+    <div class="right">
+    <button mat-mini-fab color="warn">登録</button>
+    <button mat-mini-fab color="warn">消去</button>
+　</div>
+
+</ons-toolbar>
+<div class="background"></div>
+<div class="content" id="regi-page">
+  <mat-accordion>
+    <ng-container *ngFor="let good of goodsservice.getGoods()">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          {{good.categ}}
+        </mat-expansion-panel-header>
+        <ng-container *ngFor="let ginfo of good.ginfo">
+          <button mat-raised-button color="primary">{{ginfo.gcode}}</button>
+        </ng-container>
+      </mat-expansion-panel>
+    </ng-container>
+  </mat-accordion>
+
+</div>
