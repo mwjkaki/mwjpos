@@ -26,11 +26,11 @@ export class Tab01Component implements OnInit {
   readText(){
     this.fileToText(this.file)
     .then(text => {
-      let splitted: string[] = text.split(',');
+      const splitted: string[] = text.split(',');
       this.goodsservice.resetGoods();
-      var adInf: Ginfo[];
-      var adBtn: Goods;
-      for ( var i=140;i<Object.keys(splitted).length-1;i=i+5 ){
+      let adInf: Ginfo[];
+      let adBtn: Goods;
+      for ( let i=140;i<Object.keys(splitted).length-1;i=i+5 ){
         adInf = [{ gcode:splitted[i],gname:'test',price:[+splitted[i+1]],stock:+splitted[i+2] }];
         adBtn = { categ:'大会販売品',ginfo:adInf} ;
         this.goodsservice.addGoods(adBtn);
@@ -53,12 +53,13 @@ export class Tab01Component implements OnInit {
   readGdrive(){
     this.dataId = '/1OOqrmi9jhu1q1MGQKvE2F8uujtWeyXTtTXbrjD0gYlw';
 　　this.sheeId = '/o9b4p2v'
+// oaqn5np
     this.gDrive.load( this.dataId ,this.sheeId)
       .then( ( data ) => {
         this.goodsservice.resetGoods();
-        var adInf: Ginfo[];
-        var adBtn: Goods;
-　　　　 for ( var i=0;i<data.length - 1; i++ ){
+        let adInf: Ginfo[];
+        let adBtn: Goods;
+　　　　 for ( let i=0;i<data.length - 1; i++ ){
   　　　　　 adInf = [{ gcode:data[i].gcode,gname:data[i].gname,price:[+data[i].num1,+data[i].num2,+data[i].num3],stock:+data[i].zai }];
             adBtn = { categ:data[i].categ,ginfo:adInf} ;
             this.goodsservice.addGoods(adBtn);
