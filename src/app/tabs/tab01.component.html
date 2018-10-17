@@ -6,6 +6,12 @@
   <mat-card>
     <mat-card-title>商品データ</mat-card-title>
     <mat-card>
+      <mat-card-title>GoogleDriveからデータを取得する</mat-card-title>
+      <mat-card-actions>
+        <button mat-flat-button (click)="readGdrive()" color="accent" >読込</button>
+      </mat-card-actions>
+    </mat-card>
+    <mat-card>
       <mat-card-title>端末にあるファイルを読込む</mat-card-title>
       <mat-card-content>
         <!-- テキストファイルを選択するinput -->
@@ -15,11 +21,6 @@
         <button mat-flat-button (click)="readText()" color="accent" >読込</button>
       </mat-card-actions>
     </mat-card>
-    <mat-card>
-      <mat-card-title>GoogleDriveからデータを取得する</mat-card-title>
-      <mat-card-actions>
-        <button mat-flat-button (click)="readGdrive()" color="accent" >読込</button>
-      </mat-card-actions>
-    </mat-card>
   </mat-card>
+
 </div>

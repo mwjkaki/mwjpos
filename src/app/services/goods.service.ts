@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 
-export class Ginfo {
+export interface Ginfo {
   gcode: string;
   gname: string;
   price: number[];
   stock: number;
 }
 
-export class Goods {
+export interface Goods {
   categ: string;
   ginfo: Ginfo[];
 }

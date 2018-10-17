@@ -9,11 +9,12 @@ import { Tab04Component } from './tabs/tab04.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent {
   title = 'mwjpos';
-  tab01 = Tab01Component
-  tab02 = Tab02Component
-  tab03 = Tab03Component
-  tab04 = Tab04Component
+  tab01 = Tab01Component;
+  tab02 = Tab02Component;
+  tab03 = Tab03Component;
+  tab04 = Tab04Component;
   constructor(){}
 }

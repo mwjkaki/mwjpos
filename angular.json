@@ -33,6 +33,7 @@
               },
               "./node_modules/onsenui/css/onsenui.css",
               "./node_modules/onsenui/css/onsen-css-components.css",
+              "./node_modules/font-awesome/css/font-awesome.css",
               "src/styles.scss",
               {
                 "input": "./node_modules/bootstrap/dist/css/bootstrap.css"
