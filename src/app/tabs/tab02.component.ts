@@ -19,7 +19,7 @@ export class Tab02Component implements OnInit,AfterViewInit {
   public cus:string = "119908";
   public tkbn:string = "1";
   public zkbn:string = "1";
-  private rate:number;
+  public rate:number;
   constructor(public goodsservice: GoodsService,
     public listservice: ListService,
     public custservice: CustomerService,
