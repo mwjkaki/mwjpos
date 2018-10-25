@@ -29,6 +29,7 @@ import {  MatButtonModule,
           MatExpansionModule,
           MatIconModule,
           MatInputModule,
+          MatRadioModule,
           MatSelectModule,
           MatTableModule   } from '@angular/material';
 
@@ -59,6 +60,7 @@ registerLocaleData(localeJa);
     MatExpansionModule,
     MatIconModule,
     MatInputModule,
+    MatRadioModule,
     MatSelectModule,
     MatTableModule,
     FormsModule,

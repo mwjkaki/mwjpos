@@ -20,6 +20,7 @@ export class ListService {
   addList(Gds :string, Prc :number[]) {
     let i:number = this.items.findIndex(k => k.gds==Gds)
     if  (i == -1) {
+      Prc[0] = Prc[this.tkbn]; 　
       let adGds:List = {gds:Gds,prc:Prc,cnt:1};
       this.items.push(adGds);
     } else {
@@ -29,13 +30,16 @@ export class ListService {
   }
   clear() {
     this.sum = 0;
-    this.zei=0;
+    this.zei = 0;
     this.items = new Array();　
   }
   getList() :any { return this.items; }
   setKbn(tkbn:number,zkbn:string) :void {
     this.tkbn = tkbn;
     this.zkbn = zkbn;
+    for(let i = 0; i < this.items.length; i++) {
+      this.items[i].prc[0] = this.items[i].prc[this.tkbn];
+    }
     this.calc_sum();
   }
   updList(i :number) :void {
@@ -49,22 +53,21 @@ export class ListService {
   }
   disCount(r :number) :void {
     for(let i = 0; i < this.items.length; i++) {
-      this.items[i].prc[this.tkbn - 1] = this.items[i].prc[this.tkbn - 1] - Math.floor(this.items[i].prc[this.tkbn - 1] * r / 100);
+      this.items[i].prc[0] = this.items[i].prc[this.tkbn] - Math.floor(this.items[i].prc[this.tkbn] * r / 100);
     }
     this.calc_sum();
   }
-    private calc_sum() :void {
-      this.sum=0;
-      this.zei=0;
-      for(let i = 0; i < this.items.length; i++) {
-        this.sum += this.items[i].prc[this.tkbn - 1] * this.items[i].cnt;
-      }
-      if(this.zkbn = "0"){
-        this.zei = Math.floor(this.sum * this.rat / 100);
-        this.sum = this.sum + this.zei;
-      }else{
-        this.zei = Math.floor(this.sum * this.rat / (100 + this.rat));
-      }
-
+  calc_sum() :void {
+    this.sum=0;
+    this.zei=0;
+    for(let i = 0; i < this.items.length; i++) {
+      this.sum += this.items[i].prc[0] * this.items[i].cnt;
+    }
+    if(this.zkbn = "0"){
+      this.zei = Math.floor(this.sum * this.rat / 100);
+      this.sum = this.sum + this.zei;
+    }else{
+      this.zei = Math.floor(this.sum * this.rat / (100 + this.rat));
     }
   }
+}

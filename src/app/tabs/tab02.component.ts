@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, OnInit, AfterViewInit ,Renderer } from '@angular/core';
 import { Goods, GoodsService } from '../services/goods.service';
 import { List, ListService } from '../services/list.service';
 import { SelVal,Cust, CustomerService } from '../services/customer.service';
@@ -10,8 +10,7 @@ import { GdslistValidatorService } from '../services/gdslist-validator.service';
   providers: [
     {provide: ValidatorService, useClass: GdslistValidatorService }
   ],
-  templateUrl: './tab02.component.html',
-  styleUrls: ['./tab02.component.scss']
+  templateUrl: './tab02.component.html'
 })
 export class Tab02Component implements OnInit,AfterViewInit {
   public azu:number = 10000;
@@ -19,16 +18,16 @@ export class Tab02Component implements OnInit,AfterViewInit {
   public cus:string = "119908";
   public tkbn:string = "1";
   public zkbn:string = "1";
-  public rate:number;
   constructor(public goodsservice: GoodsService,
     public listservice: ListService,
     public custservice: CustomerService,
-    private gdsListValidator: ValidatorService
-  ) {this.rate = this.listservice.rat }
+    private gdsListValidator: ValidatorService,
+    private renderer: Renderer
+  ) { }
   displayedColumns = ['gds', 'prc', 'cnt', 'sum', 'actionsColumn'];
   @Input() gdsList = this.listservice.items ;
   @Output() gdsListChange = new EventEmitter<List[]>();
-  @ViewChild('elAzu') elAzu: ElementRef;
+  // @ViewChild('elAzu') elAzu: ElementRef;
 
   dataSource: TableDataSource<List>;
   ngOnInit() {
@@ -36,8 +35,11 @@ export class Tab02Component implements OnInit,AfterViewInit {
     this.dataSource.datasourceSubject.subscribe(gdsList => this.gdsListChange.emit(gdsList));
   }
   ngAfterViewInit() {
-    let el: HTMLElement = this.elAzu.nativeElement as HTMLElement;
-    el.blur();
+    // let el: HTMLElement = this.elAzu.nativeElement as HTMLElement;
+    // this.renderer.invokeElementMethod(el, 'focus');
+  // 　this.cdRef.detectChanges();
+    // el.focus();
+    // el.blur();
   }
   addList(Gds :string, Prc :number[]) {
     this.listservice.addList(Gds,Prc);
@@ -64,5 +66,8 @@ export class Tab02Component implements OnInit,AfterViewInit {
     this.tkbn = this.custservice.getTkbn(event.value);
     this.zkbn = this.custservice.getZkbn(event.value);
     this.listservice.setKbn(+this.tkbn,this.zkbn);
+  }
+  calc(){
+    this.listservice.calc_sum();
   }
 }

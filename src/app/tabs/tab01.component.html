@@ -1,26 +1,32 @@
 <ons-toolbar>
-  <div class="center">商品・在庫データ選択</div>
+  <div class="center">マスタデータソース選択</div>
 </ons-toolbar>
 <div class="background"></div>
 <div class="content" id="initial-page">
   <mat-card>
-    <mat-card-title>商品データ</mat-card-title>
-    <mat-card>
-      <mat-card-title>GoogleDriveからデータを取得する</mat-card-title>
-      <mat-card-actions>
-        <button mat-flat-button (click)="readGdrive()" color="accent" >読込</button>
-      </mat-card-actions>
-    </mat-card>
-    <mat-card>
-      <mat-card-title>端末にあるファイルを読込む</mat-card-title>
-      <mat-card-content>
-        <!-- テキストファイルを選択するinput -->
-        <input type="file" (change)="onChangeInput($event)">
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-flat-button (click)="readText()" color="accent" >読込</button>
-      </mat-card-actions>
-    </mat-card>
+  <div fxLayout="row wrap" fxLayoutAlign="space-evenly left">
+    <mat-card-title>商品・顧客データ</mat-card-title>
+    <mat-card-actions>
+      <button mat-flat-button (click)="readMst()" color="accent" >読込</button>
+    </mat-card-actions>
+  </div>
+    <mat-radio-group [(ngModel)]="rdsel" style="display: inline-flex; flex-direction: column;">
+      <mat-card>
+        <mat-radio-button value="1">店舗用データ</mat-radio-button>
+        <mat-select placeholder="店舗" [(value)]="shop">
+          <mat-option value="/1OOqrmi9jhu1q1MGQKvE2F8uujtWeyXTtTXbrjD0gYlw,/o9b4p2v,/o8qzhy4">水道橋店</mat-option>
+          <mat-option value="/1IU-sKVB5PBPISoDns6GVQxHqc1TsBqjCihWWYzMdcls,/o9b4p2v,/o8qzhy4">札幌店</mat-option>
+        </mat-select>
+
+      </mat-card>
+      <mat-card>　
+        <mat-radio-button value="2">大会用データ</mat-radio-button>
+        <mat-card-content>
+          <!-- テキストファイルを選択するinput -->
+          <input type="file" (change)="onChangeInput($event)">
+        </mat-card-content>
+      </mat-card>
+    </mat-radio-group>
   </mat-card>
 
 </div>

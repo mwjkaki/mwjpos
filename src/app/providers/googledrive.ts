@@ -14,10 +14,10 @@ export class GoogleDriveProvider {
   constructor(public http: HttpClient) {}
 
   load( id,wid ) {
-    if (this.data) {
-      // already loaded data
-      return Promise.resolve(this.data);
-    }
+    // if (this.data) {
+    //   // already loaded data
+    //   return Promise.resolve(this.data);
+    // }
 
     var url = 'https://spreadsheets.google.com/feeds/list' + id + wid + '/public/values?alt=json';
     // don't have the data yet

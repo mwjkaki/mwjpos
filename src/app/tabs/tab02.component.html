@@ -11,7 +11,7 @@
   <mat-card id="inputhead">
     <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
       <mat-form-field>
-        <input matInput placeholder="預かり額" numberInput [(ngModel)]="azu" #elAzu>
+        <input matInput numberInput placeholder="預かり額" [(ngModel)]="azu" #elAzu>
       </mat-form-field>
       <mat-form-field>
         <input matInput style="font-weight:bold" readonly="readonly" placeholder="合計額(うち消費税)" value="{{listservice.sum | number}}({{listservice.zei | number}}) ">
@@ -21,12 +21,12 @@
         <input matInput readonly="readonly" placeholder="お釣り" value="{{azu - listservice.sum | number}}">
       </mat-form-field>
       <mat-form-field style="width:4em">
-        <input matInput autofocus placeholder="消費税率" percentInput [(ngModel)]="rate">
+        <input matInput percentInput placeholder="消費税率" (change)="calc()" [(ngModel)]="listservice.rat" #elRat>
       </mat-form-field>
     </div>
     <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
-      <mat-form-field style="width:3em">
-        <input matInput type="number" placeholder="値引率" [(ngModel)]="neb" size="3">
+      <mat-form-field style="width:4em">
+        <input matInput percentInput placeholder="値引率" [(ngModel)]="neb">
       </mat-form-field>
       <button mat-flat-button (click)="disCount(neb)" color="warn">値引計算</button>
       <mat-form-field>
@@ -43,6 +43,11 @@
         <input matInput readonly="readonly" placeholder="税区分" value="{{zkbn | zeiKbn}}">
       </mat-form-field>
     </div>
+    <div fxLayout="row wrap">
+    <mat-form-field style="width: 100%">
+      <textarea matInput placeholder="備考・メモ"></textarea>
+    </mat-form-field>
+    </div>
   </mat-card>
   <mat-card>
     <mat-table class="table-margin-bottom" #table [dataSource]="dataSource">
@@ -58,7 +63,7 @@
         <mat-header-cell *matHeaderCellDef> 単価 </mat-header-cell>
         <mat-cell *matCellDef="let row">
           <mat-form-field floatLabel="{{ row.editing ? 'float' : 'never'}}">
-            <input matInput [formControl]="row.validator.controls['prc']" numberInput placeholder="単価" [(ngModel)]="row.currentData.prc[+tkbn-1]">
+            <input matInput [formControl]="row.validator.controls['prc']" numberInput placeholder="単価" [(ngModel)]="row.currentData.prc[0]">
           </mat-form-field>
         </mat-cell>
       </ng-container>
@@ -73,7 +78,7 @@
       <ng-container matColumnDef="sum">
         <mat-header-cell *matHeaderCellDef> 計 </mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <input matInput readonly="readonly" value="{{row.currentData.prc[+tkbn-1] * row.currentData.cnt | number}}">
+          <input matInput readonly="readonly" value="{{row.currentData.prc[0] * row.currentData.cnt | number}}">
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="actionsColumn">
