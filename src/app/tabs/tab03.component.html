@@ -1,3 +1,65 @@
-<p>
-  tab03 works!
-</p>
+<ons-toolbar>
+  <div class="center">履歴一覧</div>
+  <div class="right">
+    <button mat-mini-fab color="accent">修正</button>
+    <button mat-mini-fab color="warn" (click)="refresh()">更新</button>
+  </div>
+</ons-toolbar>
+<div class="background"></div>
+<div class="content" id="hist-page">
+  <mat-card>
+    <mat-table class="table-margin-bottom" #table [dataSource]="dataSource">
+      <ng-container matColumnDef="index">
+        <mat-header-cell *matHeaderCellDef> No </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <input matInput [readonly]="readonly" value="{{row.currentData.index}}">
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="custo">
+        <mat-header-cell *matHeaderCellDef> 顧客 </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <input matInput [readonly]="readonly" value="{{row.currentData.custo}}">
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="times">
+        <mat-header-cell *matHeaderCellDef> 登録日時 </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <input matInput [readonly]="readonly" value="{{row.currentData.times | date:'M/d h:mm'}}">
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="memos">
+        <mat-header-cell *matHeaderCellDef> メモ </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <mat-form-field floatLabel="{{ row.editing ? 'float' : 'never'}}">
+            <textarea matInput [readonly]="!row.editing" placeholder="メモ" [(ngModel)]="row.currentData.memos"></textarea>
+          </mat-form-field>
+
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="prsum">
+        <mat-header-cell *matHeaderCellDef> 合計額 </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <input matInput readonly="readonly" value="{{row.currentData.prsum | number}}">
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="actionsColumn">
+        <mat-header-cell *matHeaderCellDef>
+          <!-- <button mat-icon-button color="accent" (click)="dataSource.createNew()"><i class="fa fa-plus mat-icon"></i></button> -->
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row; let i = index;">
+          <button *ngIf="!row.editing" mat-icon-button color="primary" focusable="false" (click)="row.startEdit()">
+            <i class="fa fa-pencil-square mat-icon"></i>
+          </button>
+          <button *ngIf="row.editing" mat-icon-button color="primary" focusable="false" (click)="row.confirmEditCreate()">
+            <i class="fa fa-check mat-icon"></i>
+          </button>
+          <button mat-icon-button color="primary" focusable="false" (click)="row.cancelOrDelete()">
+            <i class="fa fa-times mat-icon"></i>
+          </button>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </mat-card>
+</div>

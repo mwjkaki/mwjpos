@@ -2,12 +2,12 @@
   <div class="center">マスタデータソース選択</div>
 </ons-toolbar>
 <div class="background"></div>
-<div class="content" id="initial-page">
+<div class="content" id="mst-page">
   <mat-card>
   <div fxLayout="row wrap" fxLayoutAlign="space-evenly left">
     <mat-card-title>商品・顧客データ</mat-card-title>
     <mat-card-actions>
-      <button mat-flat-button (click)="readMst()" color="accent" >読込</button>
+      <button mat-flat-button (click)="readMst()" color="accent">読込</button>
     </mat-card-actions>
   </div>
     <mat-radio-group [(ngModel)]="rdsel" style="display: inline-flex; flex-direction: column;">
