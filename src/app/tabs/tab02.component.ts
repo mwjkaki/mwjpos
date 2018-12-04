@@ -81,6 +81,7 @@ export class Tab02Component implements OnInit,AfterViewInit {
     this.histservice.addHists(hist);
     this.tab03comp.refresh();
     this.listservice.clear();
+    this.refresh();
   }
   private refresh(){
     this.dataSource = new TableDataSource<any>(this.listservice.items, List, this.gdsListValidator);
